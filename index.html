@@ -1,0 +1,815 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Graverse</title>
+  <style>
+    :root{
+      --bg:#edf4fb;
+      --bg-soft:#f8fbff;
+      --panel:#ffffff;
+      --border:#d9e4f2;
+      --text:#0f172a;
+      --muted:#475569;
+      --cyan:#0891b2;
+      --blue:#2563eb;
+      --violet:#7c3aed;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+      overflow-x:hidden;
+    }
+
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1180px, calc(100% - 40px)); margin:0 auto}
+
+    .grid-bg{
+      position:fixed;
+      inset:0;
+      background-image:
+        linear-gradient(rgba(120,140,255,0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(120,140,255,0.12) 1px, transparent 1px);
+      background-size:32px 32px;
+      pointer-events:none;
+      opacity:.35;
+      z-index:0;
+    }
+
+    .aurora{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+      background:
+        radial-gradient(circle at 20% 18%, rgba(77,118,255,.14), transparent 28%),
+        radial-gradient(circle at 82% 10%, rgba(144,88,255,.12), transparent 30%),
+        radial-gradient(circle at 55% 78%, rgba(0,192,255,.08), transparent 34%);
+      filter:blur(18px);
+    }
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:20;
+      backdrop-filter:blur(16px);
+      background:rgba(237,244,251,.88);
+      border-bottom:1px solid var(--border);
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:16px 0;
+      gap:20px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .brand-icon{
+      width:36px;
+      height:36px;
+      border-radius:12px;
+      background:linear-gradient(135deg, #67e8f9, #60a5fa, #a78bfa);
+      box-shadow:0 0 28px rgba(96,165,250,.25);
+    }
+
+    .brand-title{
+      font-size:13px;
+      letter-spacing:.28em;
+      font-weight:700;
+    }
+
+    .brand-sub{
+      font-size:12px;
+      color:#64748b;
+    }
+
+    nav ul{
+      list-style:none;
+      display:flex;
+      gap:28px;
+      margin:0;
+      padding:0;
+      color:#475569;
+      font-size:14px;
+    }
+
+    nav a:hover{color:#0f172a}
+
+    .hero{
+      position:relative;
+      z-index:1;
+      min-height:88vh;
+      display:grid;
+      align-items:center;
+      padding:72px 0 80px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:48px;
+      align-items:center;
+    }
+
+    .pill{
+      display:inline-block;
+      padding:10px 16px;
+      border-radius:999px;
+      border:1px solid rgba(8,145,178,.18);
+      background:#ecfeff;
+      color:#0f766e;
+      font-size:12px;
+      letter-spacing:.22em;
+      font-weight:600;
+      margin-bottom:20px;
+    }
+
+    h1{
+      font-size:64px;
+      line-height:1.05;
+      letter-spacing:-.03em;
+      margin:0;
+      max-width:900px;
+    }
+
+    .gradient{
+      background:linear-gradient(90deg, #0f766e, #2563eb, #6d28d9);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .hero p{
+      max-width:760px;
+      color:#334155;
+      font-size:21px;
+      margin:24px 0 0;
+    }
+
+    .cta-row{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:34px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:14px 22px;
+      border-radius:18px;
+      font-weight:700;
+      font-size:14px;
+      transition:.2s ease;
+    }
+
+    .btn.primary{
+      background:#0f172a;
+      color:white;
+      box-shadow:0 10px 30px rgba(15,23,42,.12);
+    }
+
+    .btn.secondary{
+      border:1px solid var(--border);
+      background:white;
+      color:#0f172a;
+    }
+
+    .btn:hover{transform:translateY(-1px)}
+
+    .card{
+      position:relative;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.8);
+      border-radius:32px;
+      padding:22px;
+      backdrop-filter:blur(14px);
+      box-shadow:0 20px 70px rgba(15,23,42,.10);
+    }
+
+    .graph-card-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:16px;
+      margin-bottom:16px;
+    }
+
+    .eyebrow{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.22em;
+      color:#64748b;
+    }
+
+    .card-title{
+      font-size:20px;
+      font-weight:600;
+      margin-top:4px;
+    }
+
+    .tag{
+      font-size:12px;
+      color:#155e75;
+      border:1px solid rgba(8,145,178,.18);
+      background:#ecfeff;
+      padding:7px 12px;
+      border-radius:999px;
+      white-space:nowrap;
+    }
+
+    .graph-box{
+      position:relative;
+      overflow:hidden;
+      border-radius:24px;
+      border:1px solid var(--border);
+      background:var(--bg-soft);
+      aspect-ratio:4 / 3;
+    }
+
+    .stats{
+      position:absolute;
+      left:14px;
+      right:14px;
+      bottom:14px;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+    }
+
+    .stat{
+      background:rgba(255,255,255,.92);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:12px 14px;
+      backdrop-filter:blur(10px);
+    }
+
+    .stat strong{
+      display:block;
+      font-size:22px;
+    }
+
+    .stat span{
+      color:#64748b;
+      font-size:12px;
+    }
+
+    section{
+      position:relative;
+      z-index:1;
+      padding:90px 0;
+    }
+
+    .section-head{
+      display:grid;
+      grid-template-columns:.9fr 1.1fr;
+      gap:32px;
+      align-items:start;
+      margin-bottom:28px;
+    }
+
+    .label{
+      color:#0e7490;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.24em;
+      font-weight:700;
+      margin-bottom:12px;
+    }
+
+    h2{
+      font-size:42px;
+      line-height:1.1;
+      letter-spacing:-.03em;
+      margin:0;
+    }
+
+    .panel{
+      border:1px solid var(--border);
+      background:white;
+      border-radius:30px;
+      padding:30px;
+      box-shadow:0 16px 40px rgba(15,23,42,.08);
+    }
+
+    .panel p{
+      margin:0 0 18px;
+      color:#334155;
+      font-size:17px;
+      line-height:1.85;
+    }
+
+    .vision-band{
+      border-top:1px solid var(--border);
+      border-bottom:1px solid var(--border);
+      background:rgba(240,249,255,.75);
+    }
+
+    .two-col{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:22px;
+      margin-top:30px;
+    }
+
+    .research-grid,
+    .problem-grid,
+    .collab-grid,
+    .studies-grid{
+      display:grid;
+      gap:20px;
+    }
+
+    .research-grid{
+      grid-template-columns:repeat(4,1fr);
+      margin-top:32px;
+    }
+
+    .problem-grid{
+      grid-template-columns:repeat(2,1fr);
+      margin-top:32px;
+    }
+
+    .studies-grid{
+      grid-template-columns:repeat(2,1fr);
+      margin-top:32px;
+    }
+
+    .collab-wrap{
+      border:1px solid var(--border);
+      border-radius:32px;
+      padding:34px;
+      background:linear-gradient(135deg, rgba(34,211,238,.10), rgba(96,165,250,.05), rgba(167,139,250,.09));
+      box-shadow:0 20px 70px rgba(15,23,42,.08);
+    }
+
+    .collab-grid{
+      grid-template-columns:repeat(2,1fr);
+    }
+
+    .mini{
+      border:1px solid var(--border);
+      background:white;
+      border-radius:22px;
+      padding:18px;
+      box-shadow:0 16px 40px rgba(15,23,42,.08);
+    }
+
+    .number-box{
+      width:48px;
+      height:48px;
+      border-radius:16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:14px;
+      font-weight:700;
+      color:#155e75;
+      background:linear-gradient(135deg, #ecfeff, #dbeafe, #ede9fe);
+      margin-bottom:16px;
+    }
+
+    .mini h3{
+      margin:0 0 10px;
+      font-size:20px;
+    }
+
+    .mini p{
+      margin:0;
+      color:#475569;
+      font-size:14px;
+      line-height:1.8;
+    }
+
+    .study-list{
+      display:grid;
+      gap:14px;
+      margin-top:18px;
+    }
+
+    .study-item{
+      border:1px solid var(--border);
+      background:#f8fafc;
+      border-radius:18px;
+      padding:14px 16px;
+      color:#334155;
+      font-size:14px;
+      line-height:1.75;
+    }
+
+    footer{
+      position:relative;
+      z-index:1;
+      border-top:1px solid var(--border);
+      background:#eaf2fb;
+    }
+
+    .footer-wrap{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      padding:30px 0;
+      color:#64748b;
+      font-size:14px;
+    }
+
+    .footer-brand{
+      color:#0f172a;
+      font-size:13px;
+      font-weight:700;
+      letter-spacing:.24em;
+      margin-bottom:6px;
+    }
+
+    @keyframes pulseNode{
+      0%,100%{opacity:.55; transform:scale(1)}
+      50%{opacity:1; transform:scale(1.18)}
+    }
+
+    @keyframes glowLine{
+      0%,100%{opacity:.18}
+      50%{opacity:.5}
+    }
+
+    @keyframes float1{
+      0%,100%{transform:translate(0,0)}
+      50%{transform:translate(6px,-8px)}
+    }
+
+    @keyframes float2{
+      0%,100%{transform:translate(0,0)}
+      50%{transform:translate(-5px,7px)}
+    }
+
+    .node{transform-origin:center}
+    .node.n1{animation:float1 6s ease-in-out infinite}
+    .node.n2{animation:float2 7s ease-in-out infinite}
+    .node.n3{animation:float1 8s ease-in-out infinite}
+    .node.n4{animation:float2 9s ease-in-out infinite}
+    .node circle:first-child{animation:pulseNode 2.8s ease-in-out infinite}
+    .edge{animation:glowLine 4s ease-in-out infinite}
+
+    @media (max-width: 980px){
+      .hero-grid,
+      .section-head,
+      .two-col{
+        grid-template-columns:1fr;
+      }
+      .research-grid{grid-template-columns:repeat(2,1fr)}
+      h1{font-size:46px}
+      h2{font-size:34px}
+      .hero p{font-size:18px}
+    }
+
+    @media (max-width: 720px){
+      nav ul{display:none}
+      .research-grid,
+      .problem-grid,
+      .collab-grid,
+      .studies-grid,
+      .stats{
+        grid-template-columns:1fr;
+      }
+      .container{width:min(100% - 28px, 1180px)}
+      h1{font-size:36px}
+      h2{font-size:28px}
+      .hero{padding-top:42px}
+      section{padding:70px 0}
+      .panel, .card, .collab-wrap{padding:22px}
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <div class="aurora"></div>
+
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-icon"></div>
+        <div>
+          <div class="brand-title">GRAVERSE</div>
+          <div class="brand-sub">graverse.org</div>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#vision">Vision</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#problems">Problems</a></li>
+          <li><a href="#studies">Studies</a></li>
+          <li><a href="#collaboration">Collaboration</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="pill">GRAPH THEORY × AI</div>
+          <h1>
+            Understanding Communities in
+            <span class="gradient">Graph-Structured Systems</span>
+          </h1>
+          <p>
+            Developing graph-theoretic and learning-based methods to detect, model,
+            and analyze communities in complex networks.
+          </p>
+          <div class="cta-row">
+            <a class="btn primary" href="#research">Explore Research</a>
+            <a class="btn secondary" href="#studies">View Studies</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="graph-card-header">
+            <div>
+              <div class="eyebrow">Live Research Motif</div>
+              <div class="card-title">Community Structure Map</div>
+            </div>
+            <div class="tag">Graph Signal</div>
+          </div>
+
+          <div class="graph-box">
+            <svg viewBox="0 0 100 70" width="100%" height="100%" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="edgeGradient" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#67e8f9" stop-opacity="0.35"/>
+                  <stop offset="55%" stop-color="#60a5fa" stop-opacity="0.55"/>
+                  <stop offset="100%" stop-color="#a78bfa" stop-opacity="0.32"/>
+                </linearGradient>
+                <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+                  <stop offset="30%" stop-color="#7dd3fc" stop-opacity="0.9"/>
+                  <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.14"/>
+                </radialGradient>
+              </defs>
+
+              <ellipse cx="31" cy="28" rx="22" ry="18" fill="#0ea5e9" opacity="0.18"/>
+              <ellipse cx="68" cy="24" rx="20" ry="15" fill="#8b5cf6" opacity="0.16"/>
+              <ellipse cx="61" cy="54" rx="27" ry="16" fill="#06b6d4" opacity="0.14"/>
+
+              <line class="edge" x1="10" y1="18" x2="22" y2="30" stroke="url(#edgeGradient)" stroke-width="0.35"/>
+              <line class="edge" x1="10" y1="18" x2="34" y2="14" stroke="url(#edgeGradient)" stroke-width="0.35"/>
+              <line class="edge" x1="22" y1="30" x2="47" y2="26" stroke="url(#edgeGradient)" stroke-width="0.35"/>
+              <line class="edge" x1="34" y1="14" x2="47" y2="26" stroke="url(#edgeGradient)" stroke-width="0.35"/>
+              <line class="edge" x1="47" y1="26" x2="59" y2="16" stroke="url(#edgeGradient)" stroke-width="0.35"/>
+              <line class="edge" x1="59" y1="16" x2="73" y2="24" stroke="url(#edgeGradient)" stroke-width="0.35"/>
+              <line class="edge" x1="73" y1="24" x2="84" y2="14" stroke="url(#edgeGradient)" stroke-width="0.35"/>
+              <line class="edge" x1="22" y1="30" x2="17" y2="58" stroke="url(#edgeGradient)" stroke-width="0.35"/>
+              <line class="edge" x1="17" y1="58" x2="31" y2="48" stroke="url(#edgeGradient)" stroke-width="0.35"/>
+              <line class="edge" x1="31" y1="48" x2="46" y2="60" stroke="url(#edgeGradient)" stroke-width="0.35"/>
+              <line class="edge" x1="46" y1="60" x2="63" y2="52" stroke="url(#edgeGradient)" stroke-width="0.35"/>
+              <line class="edge" x1="63" y1="52" x2="78" y2="64" stroke="url(#edgeGradient)" stroke-width="0.35"/>
+              <line class="edge" x1="78" y1="64" x2="91" y2="50" stroke="url(#edgeGradient)" stroke-width="0.35"/>
+              <line class="edge" x1="47" y1="26" x2="31" y2="48" stroke="url(#edgeGradient)" stroke-width="0.35"/>
+              <line class="edge" x1="59" y1="16" x2="63" y2="52" stroke="url(#edgeGradient)" stroke-width="0.35"/>
+              <line class="edge" x1="73" y1="24" x2="63" y2="52" stroke="url(#edgeGradient)" stroke-width="0.35"/>
+              <line class="edge" x1="31" y1="48" x2="63" y2="52" stroke="url(#edgeGradient)" stroke-width="0.35"/>
+              <line class="edge" x1="46" y1="60" x2="78" y2="64" stroke="url(#edgeGradient)" stroke-width="0.35"/>
+
+              <g class="node n1" transform="translate(10 18)"><circle r="3" fill="url(#nodeGlow)"></circle><circle r="1" fill="#fff"></circle></g>
+              <g class="node n2" transform="translate(22 30)"><circle r="2.2" fill="url(#nodeGlow)"></circle><circle r=".8" fill="#fff"></circle></g>
+              <g class="node n3" transform="translate(34 14)"><circle r="2.5" fill="url(#nodeGlow)"></circle><circle r=".8" fill="#fff"></circle></g>
+              <g class="node n4" transform="translate(47 26)"><circle r="2.8" fill="url(#nodeGlow)"></circle><circle r=".9" fill="#fff"></circle></g>
+              <g class="node n1" transform="translate(59 16)"><circle r="2.1" fill="url(#nodeGlow)"></circle><circle r=".7" fill="#fff"></circle></g>
+              <g class="node n2" transform="translate(73 24)"><circle r="3.1" fill="url(#nodeGlow)"></circle><circle r="1" fill="#fff"></circle></g>
+              <g class="node n3" transform="translate(84 14)"><circle r="2.2" fill="url(#nodeGlow)"></circle><circle r=".8" fill="#fff"></circle></g>
+              <g class="node n4" transform="translate(17 58)"><circle r="2.7" fill="url(#nodeGlow)"></circle><circle r=".9" fill="#fff"></circle></g>
+              <g class="node n1" transform="translate(31 48)"><circle r="3.4" fill="url(#nodeGlow)"></circle><circle r="1" fill="#fff"></circle></g>
+              <g class="node n2" transform="translate(46 60)"><circle r="2.2" fill="url(#nodeGlow)"></circle><circle r=".7" fill="#fff"></circle></g>
+              <g class="node n3" transform="translate(63 52)"><circle r="3" fill="url(#nodeGlow)"></circle><circle r=".95" fill="#fff"></circle></g>
+              <g class="node n4" transform="translate(78 64)"><circle r="2.4" fill="url(#nodeGlow)"></circle><circle r=".8" fill="#fff"></circle></g>
+              <g class="node n1" transform="translate(91 50)"><circle r="1.9" fill="url(#nodeGlow)"></circle><circle r=".7" fill="#fff"></circle></g>
+            </svg>
+
+            <div class="stats">
+              <div class="stat"><strong>12</strong><span>Detected clusters</span></div>
+              <div class="stat"><strong>4</strong><span>Research themes</span></div>
+              <div class="stat"><strong>AI</strong><span>Learning-enhanced</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="label">About the Lab</div>
+            <h2>A research lab centered on community structures in graph-structured systems.</h2>
+          </div>
+          <div class="panel">
+            <p>Graverse is a research lab led by Dr. Gülnaz Borozanlı Ekinci, focusing on the study of community structures in graph-structured systems.</p>
+            <p>The lab investigates fundamental problems in community detection, including overlapping, dynamic, and uncertain network structures, combining graph-theoretic foundations with modern learning-based approaches.</p>
+            <p>Our goal is to develop robust, scalable, and theoretically grounded methods for understanding how communities emerge and evolve in complex networks.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="vision" class="vision-band">
+      <div class="container">
+        <div>
+          <div class="label" style="color:#6d28d9">Research Vision</div>
+          <h2>Advancing community detection in the age of AI.</h2>
+        </div>
+        <div class="two-col">
+          <div class="panel">
+            <p>Complex systems across science and industry are increasingly represented as graphs, where communities reveal the underlying structure of interactions. However, detecting and understanding these communities remains a fundamental challenge, especially in dynamic, uncertain, and high-dimensional settings.</p>
+          </div>
+          <div class="panel">
+            <p>Graverse aims to advance the theoretical and methodological foundations of community detection by integrating graph theory with modern learning-based approaches. We focus on developing methods that are not only accurate and scalable, but also interpretable and robust across diverse types of networks.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="research">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="label">Research Areas</div>
+            <h2>Building a rigorous agenda around communities in complex networks.</h2>
+          </div>
+          <div>
+            <p style="margin:0;color:#475569;font-size:17px;line-height:1.9">
+              Community detection lies at the core of many complex systems. Our research focuses on understanding how communities emerge, evolve, and interact in graph-structured data.
+            </p>
+          </div>
+        </div>
+
+        <div class="research-grid">
+          <div class="mini">
+            <div class="number-box">01</div>
+            <h3>Community Detection</h3>
+            <p>Identifying cohesive substructures in complex networks, including overlapping and hierarchical communities.</p>
+          </div>
+          <div class="mini">
+            <div class="number-box">02</div>
+            <h3>Dynamic and Temporal Networks</h3>
+            <p>Studying how communities emerge, evolve, split, and merge in changing graph environments.</p>
+          </div>
+          <div class="mini">
+            <div class="number-box">03</div>
+            <h3>Attributed and Heterogeneous Graphs</h3>
+            <p>Analyzing community structure in graphs with node attributes and multiple relation types.</p>
+          </div>
+          <div class="mini">
+            <div class="number-box">04</div>
+            <h3>Graph Representation Learning</h3>
+            <p>Learning representations that preserve relational patterns and reflect community structure.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="problems" class="vision-band" style="background:linear-gradient(to bottom, rgba(224,242,254,.55), transparent)">
+      <div class="container">
+        <div style="max-width:860px">
+          <div class="label" style="color:#6d28d9">Signature Problems</div>
+          <h2>Fundamental questions that define how communities are structured and understood.</h2>
+          <p style="margin-top:18px;color:#475569;font-size:17px;line-height:1.9">
+            We focus on fundamental problems that define how communities are structured and understood in complex networks.
+          </p>
+        </div>
+
+        <div class="problem-grid">
+          <div class="mini">
+            <div class="eyebrow" style="color:#0e7490">Problem 1</div>
+            <h3>Community Detection under Uncertainty</h3>
+            <p>How can we detect meaningful communities in noisy, incomplete, or partially observed graphs?</p>
+          </div>
+          <div class="mini">
+            <div class="eyebrow" style="color:#0e7490">Problem 2</div>
+            <h3>Overlapping Community Structures</h3>
+            <p>How can nodes belong to multiple communities, and how can these structures be reliably identified?</p>
+          </div>
+          <div class="mini">
+            <div class="eyebrow" style="color:#0e7490">Problem 3</div>
+            <h3>Temporal Community Evolution</h3>
+            <p>How do communities form, evolve, split, and merge over time?</p>
+          </div>
+          <div class="mini">
+            <div class="eyebrow" style="color:#0e7490">Problem 4</div>
+            <h3>Community-Aware Representations</h3>
+            <p>How can we learn embeddings that preserve and reflect community structure?</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="studies">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="label">Studies</div>
+            <h2>Publications and project tracks shaping the lab’s research identity.</h2>
+          </div>
+          <div>
+            <p style="margin:0;color:#475569;font-size:17px;line-height:1.9">
+              This section combines Gülnaz Borozanlı Ekinci’s selected publications with thematic project tracks aligned with Graverse’s research agenda.
+            </p>
+          </div>
+        </div>
+
+        <div class="studies-grid">
+          <div class="mini">
+            <div class="label" style="margin-bottom:10px">Publications</div>
+            <h3>Selected Publications</h3>
+            <div class="study-list">
+              <div class="study-item">The super-connectivity of Kneser graphs (2019)</div>
+              <div class="study-item">The super-connectivity of odd graphs and of their Kronecker double cover (2020)</div>
+              <div class="study-item">The super-connectivity of Johnson graphs (2020)</div>
+              <div class="study-item">The Super-Connectivity of the Double Vertex Graph of Complete Bipartite Graphs (2021)</div>
+              <div class="study-item">On the equality of domination number and 2-domination number (2024)</div>
+              <div class="study-item">On the reliability of generalized Petersen graphs (2019)</div>
+            </div>
+          </div>
+
+          <div class="mini">
+            <div class="label" style="margin-bottom:10px;color:#6d28d9">Projects</div>
+            <h3>Project Tracks</h3>
+            <div class="study-list">
+              <div class="study-item"><strong>Community Detection under Uncertainty</strong><br>Methods for noisy, incomplete, and partially observed graphs.</div>
+              <div class="study-item"><strong>Temporal Community Evolution</strong><br>Tracking how communities form, evolve, split, and merge over time.</div>
+              <div class="study-item"><strong>Community-Aware Embeddings</strong><br>Learning graph representations that preserve and reveal community structure.</div>
+              <div class="study-item"><strong>Attributed and Heterogeneous Networks</strong><br>Studying communities in graphs with node attributes and multiple relation types.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="collaboration">
+      <div class="container">
+        <div class="collab-wrap">
+          <div class="section-head" style="margin-bottom:22px">
+            <div>
+              <div class="label">Collaboration</div>
+              <h2>Open to European research projects and academic collaboration.</h2>
+            </div>
+            <div>
+              <p style="margin:0;color:#334155;font-size:17px;line-height:1.85">
+                The lab actively collaborates with academic and research institutions to advance the theoretical and methodological foundations of community detection in complex networks. We are particularly interested in participating in European research projects focused on graph analysis, network science, and AI-driven methodologies.
+              </p>
+            </div>
+          </div>
+
+          <div class="collab-grid">
+            <div class="mini">
+              <h3>Joint Research</h3>
+              <p>Building rigorous collaborations around graph-structured systems and community analysis.</p>
+            </div>
+            <div class="mini">
+              <h3>EU Projects</h3>
+              <p>Contributing to European consortia focused on graph analysis, AI, and network science.</p>
+            </div>
+            <div class="mini">
+              <h3>PhD Collaboration</h3>
+              <p>Supporting doctoral and graduate research on dynamic, uncertain, and attributed networks.</p>
+            </div>
+            <div class="mini">
+              <h3>Methodological Innovation</h3>
+              <p>Developing theoretically grounded methods with practical relevance across diverse graph domains.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-wrap">
+      <div>
+        <div class="footer-brand">GRAVERSE</div>
+        <div>Understanding communities in graph-structured systems.</div>
+      </div>
+      <div>graverse.org</div>
+    </div>
+  </footer>
+</body>
+</html>
+graverse.html
+Displaying graverse.html.
