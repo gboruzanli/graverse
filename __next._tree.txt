@@ -1,4 +1,4 @@
 :HL["/_next/static/chunks/0g06pzdk29t1u.css","style"]
 :HL["/brand/graverse-logo-spiral-v5.jpeg","image"]
 :HL["/posters/social-network-centrality-2209a-preview.png","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}},"staleTime":300,"buildId":"f90fVdycNJ9NN_bp7rwdm"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}},"staleTime":300,"buildId":"01h2xZM-UI_2K_uCOljFh"}

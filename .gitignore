@@ -7,3 +7,5 @@ out/
 *.log
 .DS_Store
 tsconfig.tsbuildinfo
+AGENTS.md
+CLAUDE.md

@@ -112,7 +112,7 @@ export default function Home() {
       <footer>
         <GraverseMark />
         <p>Graph Theory, Algorithms &amp; Network Science</p>
-        <div><a href="mailto:gulnaz.boruzanli@ege.edu.tr">Email</a><a href="https://github.com/gboruzanli/graverse">GitHub</a><span>© {new Date().getFullYear()}</span></div>
+        <div><a href="mailto:gulnaz.boruzanli@ege.edu.tr">Email</a><a aria-disabled="true">GitHub</a><span>© {new Date().getFullYear()}</span></div>
       </footer>
     </main>
   );
