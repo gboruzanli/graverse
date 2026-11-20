@@ -254,6 +254,11 @@ export const pageCopy = {
       intro: "Graverse is building a research community for mathematically grounded work across graphs, networks, and AI.",
       piRole: "Principal investigator",
       piOrg: "Ege University · Department of Mathematics",
+      aboutHeading: "About",
+      aboutParagraphs: [
+        "Gülnaz Boruzanlı Ekinci is an associate professor in the Computer Science Division of the Department of Mathematics at Ege University. Her research focuses on graph theory and discrete mathematics, with interests in graph domination, graph products, connectivity, and vulnerability measures.",
+        "She earned her bachelor's degree in mathematics from Middle East Technical University in 2008 and completed her master's degree in 2011 and her PhD in 2016 at Ege University. Her master's thesis examined graph vulnerability measures, and her doctoral dissertation investigated these measures in Kronecker product graphs.",
+      ],
       cvLabelTr: "CV (Turkish)",
       cvLabelEn: "CV (English)",
       formationLabel: "Graduate researchers",
@@ -359,6 +364,11 @@ export const pageCopy = {
       intro: "Graverse; çizgeler, ağlar ve yapay zekâ arasında matematiksel temelli bir araştırma topluluğu kuruyor.",
       piRole: "Laboratuvar yürütücüsü",
       piOrg: "Ege Üniversitesi · Matematik Bölümü",
+      aboutHeading: "Hakkında",
+      aboutParagraphs: [
+        "Doç. Dr. Gülnaz Boruzanlı Ekinci, Ege Üniversitesi Fen Fakültesi Matematik Bölümü, Bilgisayar Bilimleri Anabilim Dalında görev yapmaktadır. Araştırmaları çizge teorisi ve ayrık matematik üzerinedir. Başlıca çalışma konuları arasında çizgelerde baskınlık, çizge çarpımları, bağlantılılık ve zedelenebilirlik ölçümleri yer almaktadır.",
+        "Lisans eğitimini 2008 yılında Orta Doğu Teknik Üniversitesi Matematik Bölümünde tamamlamıştır. Ege Üniversitesi Matematik Bölümünde 2011 yılında yüksek lisans, 2016 yılında doktora derecesini almıştır. Yüksek lisans tezinde çizgelerde zedelenebilirlik ölçümlerini, doktora tezinde ise bu ölçümleri Kronecker çarpım çizgeleri bağlamında incelemiştir.",
+      ],
       cvLabelTr: "CV (Türkçe)",
       cvLabelEn: "CV (İngilizce)",
       formationLabel: "Lisansüstü araştırmacılar",

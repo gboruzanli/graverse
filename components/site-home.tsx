@@ -156,6 +156,10 @@ export function SiteHome({ locale }: { locale: Locale }) {
             <span>{copy.people.piRole}</span>
             <h3>{copy.hero.piName}</h3>
             <p>{copy.people.piOrg}</p>
+            <div className="pi-bio">
+              <span>{copy.people.aboutHeading}</span>
+              {copy.people.aboutParagraphs.map((paragraph) => <p key={paragraph.slice(0, 24)}>{paragraph}</p>)}
+            </div>
             <a href={`mailto:${contactEmail}`}>{contactEmail} ↗</a>
             {(hasCvTr || hasCvEn) && (
               <div className="pi-cv-links">
