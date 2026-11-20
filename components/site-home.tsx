@@ -160,7 +160,7 @@ export function SiteHome({ locale }: { locale: Locale }) {
               <span>{copy.people.aboutHeading}</span>
               {copy.people.aboutParagraphs.map((paragraph) => <p key={paragraph.slice(0, 24)}>{paragraph}</p>)}
             </div>
-            <a href={`mailto:${contactEmail}`}>{contactEmail} ↗</a>
+            <a href={`mailto:${contactEmail}`}>{copy.people.emailLabel} ↗</a>
             {(hasCvTr || hasCvEn) && (
               <div className="pi-cv-links">
                 {hasCvTr && <a className="text-link" href={cvTrUrl} download>{copy.people.cvLabelTr} ↓</a>}
