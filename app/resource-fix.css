@@ -163,3 +163,94 @@
     text-align: left;
   }
 }
+
+.funded-projects {
+  border-top: 1px solid #ffffff2e;
+  margin-top: 40px;
+  padding-top: 40px;
+}
+
+.funded-projects-head h3 {
+  font-size: 18px;
+  margin: 0 0 6px;
+}
+
+.funded-projects-head p {
+  color: #ffffffa3;
+  font-size: 13px;
+  margin: 0 0 24px;
+}
+
+.funded-projects-list {
+  display: grid;
+  gap: 1px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.funded-projects-list li {
+  align-items: baseline;
+  background: #ffffff14;
+  display: grid;
+  gap: 8px 20px;
+  grid-template-columns: 90px 1fr auto auto;
+  padding: 16px 20px;
+}
+
+.funded-years {
+  color: #ffffffa3;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.funded-title {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.funded-funder {
+  color: #ffffffa3;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.funded-status {
+  border-radius: 999px;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  padding: 5px 12px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.funded-status--ongoing {
+  background: var(--acid);
+  color: var(--ink);
+}
+
+.funded-status--completed {
+  background: transparent;
+  border: 1px solid #ffffff4a;
+  color: #ffffffa3;
+}
+
+.pi-cv-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+@media (max-width: 760px) {
+  .funded-projects-list li {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .funded-funder,
+  .funded-status {
+    justify-self: start;
+  }
+}

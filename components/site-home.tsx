@@ -1,3 +1,5 @@
+import { existsSync } from "fs";
+import { join } from "path";
 import { GraphUniverse } from "@/components/graph-universe";
 import { GraverseMark } from "@/components/mark";
 import { PublicationExplorer } from "@/components/publication-explorer";
@@ -5,6 +7,7 @@ import { ContactForm } from "@/components/contact-form";
 import {
   nav,
   researchAreas,
+  fundedProjects,
   pageCopy,
   contactEmail,
   dblpUrl,
@@ -13,12 +16,20 @@ import {
   orcidUrl,
   scopusUrl,
   researchgateUrl,
+  cvTrUrl,
+  cvEnUrl,
   type Locale,
 } from "@/content/site";
+
+function publicFileExists(publicPath: string) {
+  return existsSync(join(process.cwd(), "public", publicPath.replace(/^\//, "")));
+}
 
 export function SiteHome({ locale }: { locale: Locale }) {
   const copy = pageCopy[locale];
   const navItems = nav[locale];
+  const hasCvTr = publicFileExists(cvTrUrl);
+  const hasCvEn = publicFileExists(cvEnUrl);
 
   return (
     <main>
@@ -96,6 +107,22 @@ export function SiteHome({ locale }: { locale: Locale }) {
             </article>
           ))}
         </div>
+        <div className="funded-projects">
+          <div className="funded-projects-head">
+            <h3>{copy.projects.fundedHeading}</h3>
+            <p>{copy.projects.fundedIntro}</p>
+          </div>
+          <ol className="funded-projects-list">
+            {fundedProjects.map((project) => (
+              <li key={project.title}>
+                <span className="funded-years">{project.years}</span>
+                <span className="funded-title">{project.title}</span>
+                <span className="funded-funder">{copy.projects.funder[project.funder]}</span>
+                <span className={`funded-status funded-status--${project.status}`}>{copy.projects.status[project.status]}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
       </section>
 
       <section className="publications section-shell" id="publications">
@@ -130,6 +157,12 @@ export function SiteHome({ locale }: { locale: Locale }) {
             <h3>{copy.hero.piName}</h3>
             <p>{copy.people.piOrg}</p>
             <a href={`mailto:${contactEmail}`}>{contactEmail} ↗</a>
+            {(hasCvTr || hasCvEn) && (
+              <div className="pi-cv-links">
+                {hasCvTr && <a className="text-link" href={cvTrUrl} download>{copy.people.cvLabelTr} ↓</a>}
+                {hasCvEn && <a className="text-link" href={cvEnUrl} download>{copy.people.cvLabelEn} ↓</a>}
+              </div>
+            )}
           </div>
         </article>
         <div className="formation-note"><span>{copy.people.formationLabel}</span><p>{copy.people.formationText}</p></div>

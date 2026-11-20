@@ -121,6 +121,63 @@ export const publications = [
   },
 ] as const;
 
+export const fundedProjects = [
+  {
+    title: "SMARTKNOWLEDGE: Knowledge Graph ile Akıllı Müşteri Verileri Platformunun Geliştirilmesi",
+    years: "2023–2025",
+    funder: "tubitak",
+    status: "ongoing",
+  },
+  {
+    title: "Çizge İstatistikleri Destekli Yatırım Risk Skorlama",
+    years: "2023–2024",
+    funder: "tubitak",
+    status: "ongoing",
+  },
+  {
+    title: "Merkezlik Analizleri için Çizge Tabanlı bir Yaklaşım ve Ege Üniversitesi Araştırma Ağı Analizi",
+    years: "2023–2024",
+    funder: "tubitak",
+    status: "ongoing",
+  },
+  {
+    title: "Ulaşım Ağlarında Graf Teori ile Dayanıklılık Analizi: İzmir İli Örneği",
+    years: "2023–2024",
+    funder: "tubitak",
+    status: "ongoing",
+  },
+  {
+    title: "Regüler Çizgelerde Yapısal Bağlantılılık",
+    years: "2022–2023",
+    funder: "tubitak",
+    status: "completed",
+  },
+  {
+    title: "Çizge Tabanlı Menkul Kıymetler Bağımlılık Analiz Platformu",
+    years: "2022–2023",
+    funder: "tubitak",
+    status: "ongoing",
+  },
+  {
+    title: "İletişim Ağlarında Koşullu Bağlantılılık Parametreleri ile Dayanıklılık Analizleri",
+    years: "2021–2023",
+    funder: "hei",
+    status: "completed",
+  },
+  {
+    title: "Trendxpert: Moda Sektörü İçin Yapay Zeka Tabanlı Trend ve Fiyat Tahminlemesi",
+    years: "2020–2022",
+    funder: "tubitak",
+    status: "completed",
+  },
+  {
+    title: "Trendxpert: Moda Sektörü İçin Yapay Zeka Tabanlı Trend ve Fiyat Tahminlemesi (AB bileşeni)",
+    years: "2020–2022",
+    funder: "eu",
+    status: "completed",
+  },
+] as const;
+
 export const pageCopy = {
   en: {
     languageSwitch: { href: "/tr/", label: "EN", sub: "/ TR", aria: "Switch to the Turkish version" },
@@ -133,7 +190,7 @@ export const pageCopy = {
       ctaPrimary: "Enter the universe",
       ctaSecondary: "Read our publications",
       piLabel: "Principal investigator",
-      piName: "Gülnaz Boruzanlı Ekinci",
+      piName: "Assoc. Prof. Dr. Gülnaz Boruzanlı Ekinci",
       fieldsLabel: "Core fields",
       fields: "Graphs · Networks · AI",
     },
@@ -167,6 +224,17 @@ export const pageCopy = {
           body: "Learning systems that preserve the mathematical organization of graph-structured data.",
         },
       ],
+      fundedHeading: "Funded projects",
+      fundedIntro: "Grant-supported research the PI leads or contributes to.",
+      funder: {
+        tubitak: "TÜBİTAK",
+        hei: "Higher Education Institutions Project",
+        eu: "EU-supported project",
+      },
+      status: {
+        ongoing: "Ongoing",
+        completed: "Completed",
+      },
     },
     publications: {
       sectionNumber: "03 / Publications",
@@ -186,6 +254,8 @@ export const pageCopy = {
       intro: "Graverse is building a research community for mathematically grounded work across graphs, networks, and AI.",
       piRole: "Principal investigator",
       piOrg: "Ege University · Department of Mathematics",
+      cvLabelTr: "CV (Turkish)",
+      cvLabelEn: "CV (English)",
       formationLabel: "Graduate researchers",
       formationText: "Member profiles will be announced as the lab community takes shape.",
     },
@@ -225,7 +295,7 @@ export const pageCopy = {
       ctaPrimary: "Evrene gir",
       ctaSecondary: "Yayınlarımızı incele",
       piLabel: "Laboratuvar yürütücüsü",
-      piName: "Gülnaz Boruzanlı Ekinci",
+      piName: "Doç. Dr. Gülnaz Boruzanlı Ekinci",
       fieldsLabel: "Temel alanlar",
       fields: "Çizgeler · Ağlar · Yapay zekâ",
     },
@@ -259,6 +329,17 @@ export const pageCopy = {
           body: "Çizge biçimli verinin matematiksel düzenini koruyan öğrenme sistemleri.",
         },
       ],
+      fundedHeading: "Desteklenen projeler",
+      fundedIntro: "Laboratuvar yürütücüsünün yürüttüğü veya içinde yer aldığı fonlanan araştırma projeleri.",
+      funder: {
+        tubitak: "TÜBİTAK",
+        hei: "Yükseköğretim Kurumları Destekli Proje",
+        eu: "AB Destekli Proje",
+      },
+      status: {
+        ongoing: "Devam Ediyor",
+        completed: "Tamamlandı",
+      },
     },
     publications: {
       sectionNumber: "03 / Yayınlar",
@@ -278,6 +359,8 @@ export const pageCopy = {
       intro: "Graverse; çizgeler, ağlar ve yapay zekâ arasında matematiksel temelli bir araştırma topluluğu kuruyor.",
       piRole: "Laboratuvar yürütücüsü",
       piOrg: "Ege Üniversitesi · Matematik Bölümü",
+      cvLabelTr: "CV (Türkçe)",
+      cvLabelEn: "CV (İngilizce)",
       formationLabel: "Lisansüstü araştırmacılar",
       formationText: "Üye profilleri laboratuvar topluluğu şekillendikçe duyurulacaktır.",
     },
@@ -317,3 +400,8 @@ export const wosUrl = "https://www.webofscience.com/wos/author/record/GWZ-3314-2
 export const orcidUrl = "https://orcid.org/0000-0002-6733-6321";
 export const scopusUrl = "https://www.scopus.com/authid/detail.uri?authorId=57205600560";
 export const researchgateUrl = "https://www.researchgate.net/profile/Guelnaz_Boruzanli_Ekinci";
+
+// Static files to be placed under public/cv/ — see SiteHome, where the
+// download links are hidden while these files don't exist in the export.
+export const cvTrUrl = "/cv/gulnaz-boruzanli-ekinci-cv-tr.pdf";
+export const cvEnUrl = "/cv/gulnaz-boruzanli-ekinci-cv-en.pdf";
