@@ -2,7 +2,19 @@ import { GraphUniverse } from "@/components/graph-universe";
 import { GraverseMark } from "@/components/mark";
 import { PublicationExplorer } from "@/components/publication-explorer";
 import { ContactForm } from "@/components/contact-form";
-import { nav, researchAreas, pageCopy, contactEmail, dblpUrl, scholarUrl, wosUrl, type Locale } from "@/content/site";
+import {
+  nav,
+  researchAreas,
+  pageCopy,
+  contactEmail,
+  dblpUrl,
+  scholarUrl,
+  wosUrl,
+  orcidUrl,
+  scopusUrl,
+  researchgateUrl,
+  type Locale,
+} from "@/content/site";
 
 export function SiteHome({ locale }: { locale: Locale }) {
   const copy = pageCopy[locale];
@@ -94,12 +106,14 @@ export function SiteHome({ locale }: { locale: Locale }) {
             <a href={scholarUrl || dblpUrl}>{copy.publications.subtitleLinkText}</a>
           </p>
         </div>
-        {(scholarUrl || wosUrl) && (
-          <div className="profile-links" aria-label={locale === "tr" ? "Akademik profiller" : "Academic profiles"}>
-            {scholarUrl && <a className="profile-pill" href={scholarUrl} target="_blank" rel="noreferrer">{copy.publications.scholarProfileLabel}</a>}
-            {wosUrl && <a className="profile-pill" href={wosUrl} target="_blank" rel="noreferrer">{copy.publications.wosProfileLabel}</a>}
-          </div>
-        )}
+        <div className="profile-links" aria-label={locale === "tr" ? "Akademik profiller" : "Academic profiles"}>
+          {scholarUrl && <a className="profile-pill" href={scholarUrl} target="_blank" rel="noreferrer">{copy.publications.scholarProfileLabel}</a>}
+          {dblpUrl && <a className="profile-pill" href={dblpUrl} target="_blank" rel="noreferrer">{copy.publications.dblpProfileLabel}</a>}
+          {orcidUrl && <a className="profile-pill" href={orcidUrl} target="_blank" rel="noreferrer">{copy.publications.orcidProfileLabel}</a>}
+          {scopusUrl && <a className="profile-pill" href={scopusUrl} target="_blank" rel="noreferrer">{copy.publications.scopusProfileLabel}</a>}
+          {wosUrl && <a className="profile-pill" href={wosUrl} target="_blank" rel="noreferrer">{copy.publications.wosProfileLabel}</a>}
+          {researchgateUrl && <a className="profile-pill" href={researchgateUrl} target="_blank" rel="noreferrer">{copy.publications.researchgateProfileLabel}</a>}
+        </div>
         <PublicationExplorer locale={locale} />
       </section>
 

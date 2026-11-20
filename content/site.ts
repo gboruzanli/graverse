@@ -173,8 +173,12 @@ export const pageCopy = {
       heading: "Recent work.",
       subtitlePrefix: "Selected journal and conference papers · Full list on ",
       subtitleLinkText: "Google Scholar",
-      scholarProfileLabel: "Google Scholar Profile",
-      wosProfileLabel: "WoS Profile",
+      scholarProfileLabel: "Google Scholar",
+      wosProfileLabel: "Web of Science",
+      orcidProfileLabel: "ORCID",
+      scopusProfileLabel: "Scopus",
+      researchgateProfileLabel: "ResearchGate",
+      dblpProfileLabel: "DBLP",
     },
     people: {
       sectionNumber: "04 / People",
@@ -261,8 +265,12 @@ export const pageCopy = {
       heading: "Güncel çalışmalar.",
       subtitlePrefix: "Seçilmiş dergi ve konferans bildirileri · Tam liste ",
       subtitleLinkText: "Google Scholar'da",
-      scholarProfileLabel: "Google Akademik Profili",
-      wosProfileLabel: "WoS Profili",
+      scholarProfileLabel: "Google Akademik",
+      wosProfileLabel: "Web of Science",
+      orcidProfileLabel: "ORCID",
+      scopusProfileLabel: "Scopus",
+      researchgateProfileLabel: "ResearchGate",
+      dblpProfileLabel: "DBLP",
     },
     people: {
       sectionNumber: "04 / İnsanlar",
@@ -303,7 +311,9 @@ export const pageCopy = {
 export const contactEmail = "gulnaz.boruzanli@ege.edu.tr";
 export const dblpUrl = "https://dblp.org/pid/179/3810.html";
 
-// Leave empty until the real profile URLs are confirmed — the matching
-// buttons/links are hidden while these are blank (see SiteHome).
-export const scholarUrl = "";
-export const wosUrl = "";
+// Links below are hidden on the site while blank (see SiteHome).
+export const scholarUrl = "https://scholar.google.com.tr/citations?user=0Aa-qUoAAAAJ&hl=en";
+export const wosUrl = "https://www.webofscience.com/wos/author/record/GWZ-3314-2022";
+export const orcidUrl = "https://orcid.org/0000-0002-6733-6321";
+export const scopusUrl = "https://www.scopus.com/authid/detail.uri?authorId=57205600560";
+export const researchgateUrl = "https://www.researchgate.net/profile/Guelnaz_Boruzanli_Ekinci";
