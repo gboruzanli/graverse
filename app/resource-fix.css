@@ -112,3 +112,54 @@
     max-height: 70vh;
   }
 }
+
+.publications-subtitle {
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  margin: 0;
+  max-width: 420px;
+  text-align: right;
+}
+
+.publications-subtitle a {
+  border-bottom: 1px solid;
+  color: inherit;
+  padding-bottom: 1px;
+}
+
+.profile-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0 8px;
+}
+
+.profile-pill {
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  padding: 10px 18px;
+  text-transform: uppercase;
+  transition: background 0.2s, color 0.2s;
+}
+
+.profile-pill:hover {
+  background: var(--ink);
+  color: #fff;
+}
+
+@media (max-width: 760px) {
+  .section-heading.horizontal {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .publications-subtitle {
+    max-width: none;
+    text-align: left;
+  }
+}
